@@ -3,6 +3,7 @@ package com.walaszczyk.example.employeeCRUD.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,5 +56,13 @@ public class EmployeeRestController {
 		return employee;
 	}
 	
-	@PostMapping("/employees")
+	@DeleteMapping("/employees/{employeeID}")
+	public String deleteEmployee(@PathVariable int employeeID) {
+		Employee employee = employeeService.findById(employeeID);
+		
+		if(employee == null) {
+			throw new RuntimeException("Employee is not found - " + employeeID);
+		}
+		return "Deleted employee id - " + employeeID;
+	}
 }
