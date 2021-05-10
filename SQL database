@@ -35,18 +35,6 @@ CREATE TABLE `team_employee` (
     FOREIGN KEY (`id_team`) REFERENCES team(`id`)
 );
 
-INSERT INTO `employee_directory`.`active_employee`
-(`employee_date`,
-`id`,
-`id_employee`,
-`salary`)
-VALUES
-('2021-07-01',
-1,
-1,
-2500);
-
-
 INSERT INTO `team` (`name`) VALUES 
 	('Alfa'),
 	('Beta'),
@@ -60,3 +48,14 @@ INSERT INTO `employee` VALUES
 	(3,'Avani'),
 	(4,'Yuri'),
 	(5,'Juan');
+	
+INSERT INTO `employee_directory`.`active_employee`
+(`employee_date`,
+`id`,
+`id_employee`,
+`salary`)
+VALUES
+('2021-07-01',
+1,
+1,
+2500);
