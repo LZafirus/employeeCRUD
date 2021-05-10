@@ -1,0 +1,62 @@
+CREATE DATABASE  IF NOT EXISTS `employee_directory`;
+USE `employee_directory`;
+
+DROP TABLE IF EXISTS `employee`;
+DROP TABLE IF EXISTS `active_employee`;
+DROP TABLE IF EXISTS `team`;
+DROP TABLE IF EXISTS `team_employee`;
+
+CREATE TABLE `employee` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `active_employee` (
+	`id` int NOT NULL AUTO_INCREMENT,
+    `id_employee` INT NOT NULL unique,
+    `salary` INT NOT NULL,
+    `employee_date` DATE NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`id_employee`) REFERENCES employee(`id`)
+);
+
+CREATE  TABLE `team` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(50) DEFAULT NULL,
+    PRIMARY KEY(`id`)
+);
+
+CREATE TABLE `team_employee` (
+	`id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`id_employee` INT NOT NULL,
+    `id_team` INT NOT NULL,
+    FOREIGN KEY (`id_employee`) REFERENCES employee(`id`),
+    FOREIGN KEY (`id_team`) REFERENCES team(`id`)
+);
+
+INSERT INTO `employee_directory`.`active_employee`
+(`employee_date`,
+`id`,
+`id_employee`,
+`salary`)
+VALUES
+('2021-07-01',
+1,
+1,
+2500);
+
+
+INSERT INTO `team` (`name`) VALUES 
+	('Alfa'),
+	('Beta'),
+	('Charlie'),
+	('Delta'),
+	('Echo');
+
+INSERT INTO `employee` VALUES 
+	(1,'Leslie'),
+	(2,'Emma'),
+	(3,'Avani'),
+	(4,'Yuri'),
+	(5,'Juan');
