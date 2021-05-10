@@ -1,5 +1,8 @@
 package com.walaszczyk.example.employeeCRUD.entity;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,17 +27,22 @@ public class ActiveEmployee {
 	@Column(name="salary")
 	private double salary;
 	
-	
-	/*	
-	 *  Dodać employee date
-	 */
-	
-	//private date employee_date;
+	@Column(name="employee_date")
+	private LocalDate employeeDate;
 	
 	@OneToOne(mappedBy="activeEmployee", cascade=CascadeType.ALL)
 	private Employee employee;
 	
+	public ActiveEmployee() {
+
+	}
 	
+	public ActiveEmployee(double salary, LocalDate employeeDate) {
+		super();
+		this.salary = salary;
+		this.employeeDate = employeeDate;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -58,9 +66,26 @@ public class ActiveEmployee {
 	public void setSalary(double salary) {
 		this.salary = salary;
 	}
-	
-	
-	
-	
 
+	public LocalDate getEmployeeDate() {
+		return employeeDate;
+	}
+
+	public void setEmployeeDate(LocalDate employeeDate) {
+		this.employeeDate = employeeDate;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	@Override
+	public String toString() {
+		return "ActiveEmployee [id=" + id + ", idEmployee=" + idEmployee + ", salary=" + salary + ", employeeDate="
+				+ employeeDate + ", employee=" + employee + "]";
+	}
 }
