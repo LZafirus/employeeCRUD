@@ -1,15 +1,17 @@
 package com.walaszczyk.example.employeeCRUD.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-//@Entity
+@Entity
 @Table(name="active_employee")
-public class ActiveEmployee extends Employee {
+public class ActiveEmployee {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -20,7 +22,7 @@ public class ActiveEmployee extends Employee {
 	private int idEmployee;
 	
 	@Column(name="salary")
-	private long salary;
+	private double salary;
 	
 	
 	/*	
@@ -28,6 +30,9 @@ public class ActiveEmployee extends Employee {
 	 */
 	
 	//private date employee_date;
+	
+	@OneToOne(mappedBy="activeEmployee", cascade=CascadeType.ALL)
+	private Employee employee;
 	
 	
 	public int getId() {
@@ -46,11 +51,11 @@ public class ActiveEmployee extends Employee {
 		this.idEmployee = idEmployee;
 	}
 
-	public long getSalary() {
+	public double getSalary() {
 		return salary;
 	}
 
-	public void setSalary(long salary) {
+	public void setSalary(double salary) {
 		this.salary = salary;
 	}
 	
