@@ -1,9 +1,9 @@
 package com.walaszczyk.example.employeeCRUD.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.walaszczyk.example.employeeCRUD.dao.EmployeeDAO;
 import com.walaszczyk.example.employeeCRUD.entity.Employee;
@@ -18,25 +18,30 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	
 	@Override
-	@Transactional
 	public List<Employee> findAll() {
 		return employeeDAO.findAll();
 	}
 
 	@Override
-	@Transactional
 	public Employee findById(int id) {
-		return employeeDAO.findById(id);
+		Optional<Employee> result = employeeDAO.findById(id);
+		
+		Employee employee = null;
+		if(result.isPresent()) {
+			employee = result.get(); 
+		}
+		else {
+			throw new RuntimeException("Did not find employee id - " + id);
+		}
+		return employee;
 	}
 
 	@Override
-	@Transactional
 	public void save(Employee employee) {
 		employeeDAO.save(employee);		
 	}
 
 	@Override
-	@Transactional
 	public void deleteById(int employeeID) {
 		employeeDAO.deleteById(employeeID);		
 	}

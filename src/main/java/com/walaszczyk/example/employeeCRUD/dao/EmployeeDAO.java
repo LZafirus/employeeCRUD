@@ -1,17 +1,10 @@
 package com.walaszczyk.example.employeeCRUD.dao;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.walaszczyk.example.employeeCRUD.entity.Employee;
 
-public interface EmployeeDAO {
+public interface EmployeeDAO extends JpaRepository<Employee, Integer> {
 
-	public List<Employee> findAll();
-	
-	public Employee findById(int id);
-	
-	public void save(Employee employee);
-	
-	public void deleteById(int id);
 	
 }
